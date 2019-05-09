@@ -666,11 +666,16 @@ class StartChat:
 	will be chosen. If they are more than one, one of them will randomly be chosen.
 	comparing 'hello, how are you?' to 'how are you' should return about 0.7586206896551724 match:
 	This is done by the python function defined here:
+	
 	def ratio_match(user_input,existing):
         	from difflib import SequenceMatcher as sm
         	return sm(None,user,existing).ratio()
+		
 	and that is about 76% match rate. Therefore the previosly recorded answer for the question:
-	'helllo, how are you?' can also be given to the question 'how are you'
+	'hello, how are you?' can also be given to the question 'how are you'. 
+	However, we would like our answers to be a bit dynamic, therefore, all answers belonging to the category
+	of that question are possible answers for the question, we therefore use choice() 
+	a function from python's random module to randomly choose one of these possible answers.
 	"""
         res = self.get_specific(tokens=checker,robot_name=robot_name,bot_ratio=0.6)
         return Parser().parse(res=res,snt=tokens,company=company,robot_name=robot_name)
